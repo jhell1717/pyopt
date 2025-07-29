@@ -5,13 +5,13 @@ A lightweight and modular Python package for building Gaussian Process surrogate
 ## 📦 Features
 
 - Build and train a Gaussian Process (GP) model using BoTorch
-- Define and evaluate black-box functions
+- Define and evaluate an 'unknown' function
 - Optimize an acquisition function (UCB) to find promising candidate points
 - Visualize the GP model and optimization progress
 
 ---
 
-## 🚀 Quick Start
+## Quick Start
 
 ### 1. Install Dependencies
 
