@@ -1,0 +1,19 @@
+[project]
+name = "pyopt"
+version = "0.0.0"
+description = "Python Geom Optimisation"
+authors = [
+    { name = "Josh Hellewell", email = "jhellewell1722@gmail.com" }
+]
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.11"
+dependencies = [
+    "torch",
+    "botorch",
+    "gpytorch"
+]
+
+[build-system]
+requires = ["setuptools>=42"]
+build-backend = "setuptools.build_meta"
