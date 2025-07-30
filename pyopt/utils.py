@@ -18,7 +18,7 @@ def plot_gp_plain(x,y,mean,std,data):
     #     plt.scatter(candidate.numpy(), new_y.numpy(),
     #                 c='g', marker='*', s=200, label='New Point')
     plt.legend()
-    plt.title("Bayesian Optimization with BoTorch")
+    plt.title("Bayesian Optimisation")
     plt.xlabel("x")
     plt.ylabel("f(x)")
     plt.grid(True)
@@ -42,7 +42,7 @@ def plot_gp_optim(x,y,mean,std,data,candidate,new_y):
     plt.scatter(candidate.numpy(), new_y.numpy(),
                     c='g', marker='*', s=200, label='New Point')
     plt.legend()
-    plt.title("Bayesian Optimization with BoTorch")
+    plt.title("Bayesian Optimisation")
     plt.xlabel("x")
     plt.ylabel("f(x)")
     plt.grid(True)
