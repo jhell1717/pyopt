@@ -1,13 +1,15 @@
-# Bayesian Optimization Package
+# Bayesian Optimisation Package
 
-A lightweight and modular Python package for building Gaussian Process surrogate models and performing Bayesian Optimization on black-box functions. Ideal for optimization tasks where function evaluations are expensive or noisy.
+A lightweight and modular Python package for building Gaussian Process surrogate models and performing Bayesian Optimisation on an arbitary functions. Ideal for optimisation tasks where function evaluations are expensive or noisy.
+
+Unlike active learning, where the objective is to learn as much about the underlying function in a finite number of evaluations, Bayesian learning balances exploitation and exploration via smart acquisition functions. In this example, we implement the upper confidence bound (UCB) that has a hyperparamater $\beta$ to control this balance.
 
 ## 📦 Features
 
 - Build and train a Gaussian Process (GP) model using BoTorch
 - Define and evaluate an 'unknown' function
-- Optimize an acquisition function (UCB) to find promising candidate points
-- Visualize the GP model and optimization progress
+- Optimise an acquisition function (UCB) to find promising candidate points
+- Visualise the GP model and optimisation progress
 
 ---
 
