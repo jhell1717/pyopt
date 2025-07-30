@@ -1,4 +1,4 @@
-from .blackbox import black_box_function
+from .func import black_box_function
 from .data import Data
 from .gpr import GP
 from .optimiser import Optimiser
