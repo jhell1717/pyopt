@@ -1,8 +1,8 @@
 # Bayesian Optimisation Package
 
-A lightweight and modular Python package for building Gaussian Process surrogate models and performing Bayesian Optimisation on an arbitary functions. Ideal for optimisation tasks where function evaluations are expensive or noisy.
+A lightweight and modular Python package for building Gaussian Process surrogate models and performing Bayesian Optimisation on an arbitary function. Ideal for optimisation tasks where function evaluations are expensive or noisy.
 
-Unlike active learning where the objective is to learn as much about the underlying function in a finite number of evaluations, Bayesian optimisation balances exploitation and exploration via smart acquisition functions to perform optimisation (e.g., minimisation or maximisation) In this example, we implement the upper confidence bound (UCB) that has a hyperparamater $$\beta$$ to control this balance.
+Unlike active learning where the objective is to learn as much about the underlying function in a finite number of evaluations as possible, Bayesian optimisation balances exploitation and exploration via smart acquisition functions to perform optimisation (e.g., minimisation or maximisation) In this example, we implement the upper confidence bound (UCB) that has a hyperparamater $$\beta$$ to control this balance.
 
 ## Features
 
