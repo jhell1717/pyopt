@@ -10,17 +10,21 @@ class GP:
         self.data = data
         self.device = self._get_device()
         self.bounds = self._create_bounds()
+        self.input, self.output = self._create_features()
         self.gp = None
 
     def _get_device(self):
         return torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    
+    def _create_features(self):
+        return torch.cat([self.data.x,self.data.y],dim=-1), self.data.z
 
     def _create_bounds(self):
         return torch.tensor([[self.data.low_lim], [self.data.up_lim]], dtype=torch.float32)
 
     def train_gp(self):
         """Train the Gaussian Process model using the data."""
-        self.gp = SingleTaskGP(self.data.x, self.data.y)
+        self.gp = SingleTaskGP(self.input, self.output)
         mll = ExactMarginalLogLikelihood(self.gp.likelihood, self.gp)
         fit_gpytorch_mll(mll)
 
@@ -37,8 +41,9 @@ class GP:
 
     def plot_gp(self):
         """Visualize the GP predictions using the provided data object."""
-        x_plot, y_plot = self.data.create_vis_data()
-        _, mean, std = self.get_posterior(x_plot)
-        plot_gp_plain(x_plot, y_plot, mean, std, self.data)
-    
+        x_plot, y_plot, z_plot = self.data.create_vis_data()
+        _, mean, std = self.get_posterior(torch.cat([x_plot.unsqueeze(1),y_plot.unsqueeze(1)],dim=-1))
+        plot_gp_plain(x_plot, y_plot, z_plot,mean, std, self.data)
+        return x_plot,y_plot,z_plot
+
 
