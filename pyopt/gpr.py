@@ -44,6 +44,5 @@ class GP:
         x_plot, y_plot, z_plot = self.data.create_vis_data()
         _, mean, std = self.get_posterior(torch.cat([x_plot.unsqueeze(1),y_plot.unsqueeze(1)],dim=-1))
         plot_gp_plain(x_plot, y_plot, z_plot,mean, std, self.data)
-        return x_plot,y_plot,z_plot
 
 

@@ -23,6 +23,15 @@ def plot_gp_plain(X, Y, Z, mean, std, data):
         ),
         scene_aspectmode='cube',
         )
+    
+    fig.add_trace(go.Scatter3d(
+        x=data.x.squeeze(),
+        y=data.y.squeeze(),
+        z=data.z.squeeze(),
+        mode='markers',
+        marker=dict(size=6, color='red', symbol='circle'),
+        name='Sampled Points'
+        ))
     fig.show()
 
 def plot_gp_optim(x,y,mean,std,data,candidate,new_y):
