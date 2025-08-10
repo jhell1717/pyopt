@@ -1,5 +1,5 @@
 import torch
-from .func import black_box_function
+from .func import black_box_function, complex_black_box_function
 
 class Data:
     def __init__(self, low_lim, up_lim, num_points=5):
@@ -16,6 +16,10 @@ class Data:
     def _evaluate(self, x):
         """Evaluate the black-box function on input x."""
         return black_box_function(x)
+    
+    # def _evaluate(self, x):
+    #     """Evaluate the black-box function on input x."""
+    #     return complex_black_box_function(x)
 
     def create_vis_data(self, num_points=200):
         """Generate evenly spaced data for plotting the black-box function."""

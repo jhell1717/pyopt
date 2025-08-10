@@ -1,23 +1,31 @@
 import torch
-from botorch.acquisition import UpperConfidenceBound
+from botorch.acquisition import UpperConfidenceBound, ExpectedImprovement
 from botorch.optim import optimize_acqf
 from .utils import plot_gp_optim
 
 
 class Optimiser:
-    def __init__(self, gp_model, q_samples=1, beta=0.1, raw_samples=20):
+    def __init__(self, gp_model, q_samples=1, beta=0.1, raw_samples=20, acquisition_type="ucb"):
         self.gp_model = gp_model
         self.q_samples = q_samples
         self.beta = beta
         self.raw_samples = raw_samples
+        self.acquisition_type = acquisition_type
 
         self.acq_func = self._build_acquisition_function()
         self.candidate = None
         self.new_y = None
 
     def _build_acquisition_function(self):
-        """Create an Upper Confidence Bound acquisition function."""
-        return UpperConfidenceBound(self.gp_model.gp, beta=self.beta)
+        """Create the specified acquisition function."""
+        if self.acquisition_type.lower() == "ei":
+            return ExpectedImprovement(self.gp_model.gp, best_f=self._get_best_f())
+        else:  # default to UCB
+            return UpperConfidenceBound(self.gp_model.gp, beta=self.beta)
+
+    def _get_best_f(self):
+        """Get the best observed function value so far."""
+        return self.gp_model.data.y.max()
 
     def optimise(self):
         """Optimise the acquisition function and update the GP model with a new observation."""
