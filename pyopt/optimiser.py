@@ -14,7 +14,7 @@ class Optimiser:
 
         self.acq_func = self._build_acquisition_function()
         self.candidate = None
-        self.new_y = None
+        self.new_z = None
 
     def _build_acquisition_function(self):
         """Create the specified acquisition function."""
@@ -36,18 +36,20 @@ class Optimiser:
             num_restarts=5,
             raw_samples=self.raw_samples,
         )
-        self.new_y = self._evaluate_candidate(self.candidate)
-        self._update_data(self.candidate, self.new_y)
+        self.new_z = self._evaluate_candidate(self.candidate)
+        self._update_data(self.candidate, self.new_z.view(1,1))
 
-    def _evaluate_candidate(self, x):
+    def _evaluate_candidate(self, candidate):
         """Evaluate the candidate point using the black-box function."""
-        return self.gp_model.data._evaluate(x)
+        return self.gp_model.data._evaluate(candidate[0][0],candidate[0][1])
 
-    def _update_data(self, x, y):
+    def _update_data(self, candidate, z):
         """Append the new observation to the GP model’s data."""
         data = self.gp_model.data
+        x,y = torch.split(candidate,1,dim=1)
         data.x = torch.cat([data.x, x])
         data.y = torch.cat([data.y, y])
+        data.z = torch.cat([data.z, z])
 
     def visualise(self):
         """Plot the GP model and the newly selected candidate point."""

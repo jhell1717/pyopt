@@ -20,7 +20,7 @@ class GP:
         return torch.cat([self.data.x,self.data.y],dim=-1), self.data.z
 
     def _create_bounds(self):
-        return torch.tensor([[self.data.low_lim], [self.data.up_lim]], dtype=torch.float32)
+        return torch.tensor([[self.data.low_lim,self.data.low_lim], [self.data.up_lim,self.data.up_lim]], dtype=torch.float32)
 
     def train_gp(self):
         """Train the Gaussian Process model using the data."""
