@@ -1,11 +1,6 @@
-import matplotlib.pyplot as plt
 import plotly.graph_objects as go
-import numpy as np 
 import torch
-
-
 import torch
-import plotly.graph_objects as go
 
 def plot_gp_plain(X, Y, Z, mean, std, data):
     fig = go.Figure()
