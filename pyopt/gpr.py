@@ -28,6 +28,7 @@ class GP:
         mll = ExactMarginalLogLikelihood(self.gp.likelihood, self.gp)
         fit_gpytorch_mll(mll)
 
+
     def get_posterior(self, x_input):
         """Compute GP posterior and return posterior object, mean, and std."""
         self.gp.eval()
@@ -42,7 +43,22 @@ class GP:
     def plot_gp(self):
         """Visualize the GP predictions using the provided data object."""
         x_plot, y_plot, z_plot = self.data.create_vis_data()
-        _, mean, std = self.get_posterior(torch.cat([x_plot.unsqueeze(1),y_plot.unsqueeze(1)],dim=-1))
-        plot_gp_plain(x_plot, y_plot, z_plot,mean, std, self.data)
 
+        # Create meshgrid for visualization - use 'ij' indexing for consistency
+        X, Y = torch.meshgrid(x_plot, y_plot, indexing='ij')
+        
+        # Create flat coordinates for GP prediction - ensure proper ordering
+        # This creates a flattened array that matches the meshgrid exactly
+        x_coords = x_plot.unsqueeze(1).repeat(1, len(y_plot)).flatten()
+        y_coords = y_plot.repeat(len(x_plot))
+        X_Y_flat = torch.stack([x_coords, y_coords], dim=-1)
 
+        _, mean, std = self.get_posterior(X_Y_flat)
+
+        # Reshape predictions to match the grid dimensions
+        # Note: We need to transpose because meshgrid with 'ij' indexing gives different shape
+        mean = mean.reshape(len(x_plot), len(y_plot))
+        std = std.reshape(len(x_plot), len(y_plot))
+        
+        plot_gp_plain(x_plot, y_plot, z_plot, mean, std, self.data)
+        return x_plot, y_plot, z_plot, X_Y_flat
