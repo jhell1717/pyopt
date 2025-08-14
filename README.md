@@ -15,7 +15,7 @@ Unlike active learning where the objective is to learn as much about the underly
 ## Examples
 
 Example:
-<a href="https://colab.research.google.com/github/jhell1717/pyopt/blob/dimensions%2F2D/examples/example.ipynb#scrollTo=IVgiDpU8_rQG" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
+<a href="https://colab.research.google.com/github/jhell1717/pyopt/blob/dimensions%2F2D/examples/example.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a>
 
 
 ## Quick Start
